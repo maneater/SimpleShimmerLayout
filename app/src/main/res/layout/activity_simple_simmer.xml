@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            app:baseAlpha="0.1"
             app:autoStart="true">
 
             <include layout="@layout/inner_layout" />
