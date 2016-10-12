@@ -58,4 +58,16 @@ public class FrameLayout extends android.widget.FrameLayout implements ShimmerHe
     public void callSupperOnDraw(Canvas canvas) {
         super.onDraw(canvas);
     }
+
+    public void setAutoStart(boolean autoStart) {
+        shimmerHelper.setAutoStart(autoStart);
+    }
+
+    public void stopShimmerAnimation() {
+        shimmerHelper.stopShimmer();
+    }
+
+    public void startShimmerAnimation() {
+        shimmerHelper.startShimmer();
+    }
 }

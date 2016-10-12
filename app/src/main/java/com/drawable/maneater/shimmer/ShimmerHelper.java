@@ -39,12 +39,15 @@ public class ShimmerHelper {
     private ValueAnimator mAnimator;
 
     private float mBaseAlpha = 0.8f;
-    private boolean mAutoStart = false;
+    private boolean isAttachToWindow = false;
     private boolean mIsStarted = false;
     private int mRepeatCount = ValueAnimator.INFINITE;
     private int mRepeatMode = ValueAnimator.RESTART;
     private int mRepeatDelay = 300;
     private int mDuration = 800;
+    private boolean mAutoStart;
+
+    private boolean mForceStop = false;
 
     public ShimmerHelper(ShimmerView targetView) {
         this.shimmerView = new WeakReference<ShimmerView>(targetView);
@@ -137,23 +140,28 @@ public class ShimmerHelper {
     }
 
     public void onAttachedToWindow() {
-        if (mAutoStart && !mIsStarted) {
+        isAttachToWindow = true;
+        if (mAutoStart && !mIsStarted && !mForceStop) {
             startShimmer();
         }
     }
 
     public void onDetachedFromWindow() {
+        isAttachToWindow = false;
         stopShimmer();
     }
 
 
     public void startShimmer() {
+        mForceStop = false;
         mIsStarted = true;
         getShimmerAnimation().start();
     }
 
     public void stopShimmer() {
+        mForceStop = true;
         mIsStarted = false;
+        mAutoStart = false;
         if (mAnimator != null) {
             mAnimator.cancel();
             mAnimator = null;
@@ -205,6 +213,13 @@ public class ShimmerHelper {
 
     private static float clamp(float min, float max, float value) {
         return Math.min(max, Math.max(min, value));
+    }
+
+    public void setAutoStart(boolean autoStart) {
+        this.mAutoStart = autoStart;
+        if (isAttachToWindow) {
+            startShimmer();
+        }
     }
 
 

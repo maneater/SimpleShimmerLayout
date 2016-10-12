@@ -57,4 +57,16 @@ public class LinearLayout extends android.widget.LinearLayout implements Shimmer
     public void callSupperOnDraw(Canvas canvas) {
         super.onDraw(canvas);
     }
+
+    public void setAutoStart(boolean autoStart) {
+        shimmerHelper.setAutoStart(autoStart);
+    }
+
+    public void stopShimmerAnimation() {
+        shimmerHelper.stopShimmer();
+    }
+
+    public void startShimmerAnimation() {
+        shimmerHelper.startShimmer();
+    }
 }
