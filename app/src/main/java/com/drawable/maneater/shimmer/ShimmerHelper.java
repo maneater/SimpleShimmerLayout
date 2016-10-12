@@ -38,7 +38,7 @@ public class ShimmerHelper {
             | Canvas.CLIP_TO_LAYER_SAVE_FLAG;
     private ValueAnimator mAnimator;
 
-    private float mBaseAlpha = 0.8f;
+    private int mBaseAlpha = (int) (0.8f * 255);
     private boolean isAttachToWindow = false;
     private boolean mIsStarted = false;
     private int mRepeatCount = ValueAnimator.INFINITE;
@@ -61,7 +61,7 @@ public class ShimmerHelper {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ShimmerView);
         try {
             mAutoStart = ta.getBoolean(R.styleable.ShimmerView_autoStart, mAutoStart);
-            mBaseAlpha = ta.getFloat(R.styleable.ShimmerView_baseAlpha, mBaseAlpha);
+            mBaseAlpha = (int) (ta.getFloat(R.styleable.ShimmerView_baseAlpha, 0.8f) * 255);
             mRepeatCount = ta.getInt(R.styleable.ShimmerView_repeatCount, mRepeatCount);
             mRepeatMode = ta.getInt(R.styleable.ShimmerView_repeatMode, mRepeatMode);
             mDuration = ta.getInt(R.styleable.ShimmerView_duration, mDuration);
@@ -71,34 +71,41 @@ public class ShimmerHelper {
         } finally {
             ta.recycle();
         }
-
     }
 
 
     public void dispatchDraw(Canvas canvas) {
         ShimmerView targetView = this.shimmerView.get();
-        if (targetView instanceof ViewGroup) {
+        if (targetView != null) {
+            if (!mIsStarted) {
+                targetView.callSuperOnDispatchDraw(canvas);
+                return;
+            }
 
-            int viewWidth = targetView.getWidth();
-            int viewHeight = targetView.getHeight();
+            if (targetView instanceof ViewGroup) {
+                int viewWidth = targetView.getWidth();
+                int viewHeight = targetView.getHeight();
+                //        draw alpha base
+                canvas.saveLayerAlpha(0, 0, viewWidth, viewHeight, mBaseAlpha, LAYER_FLAGS);
+                targetView.callSuperOnDispatchDraw(canvas);
+                canvas.restore();
 
-            //        draw alpha base
-            canvas.saveLayerAlpha(0, 0, viewWidth, viewHeight, (int) (255 * mBaseAlpha), LAYER_FLAGS);
-            targetView.callSuperOnDispatchDraw(canvas);
-            canvas.restore();
 
+                float left = xOffsetFactor * viewWidth;
+                float length = viewWidth * maskLengthFactor;
 
-            float left = xOffsetFactor * viewWidth;
-            float length = viewWidth * maskLengthFactor;
+                canvas.saveLayer(0, 0, viewWidth, viewHeight, null, LAYER_FLAGS);
+                targetView.callSuperOnDispatchDraw(canvas);
+                checkAndSetShader(viewWidth, viewHeight, (int) length);
+                canvas.translate(left, 0);
+                canvas.drawRect(-viewWidth, 0, viewWidth * 2, viewHeight, mPaint);
 
-            canvas.saveLayer(0, 0, viewWidth, viewHeight, null, LAYER_FLAGS);
-            targetView.callSuperOnDispatchDraw(canvas);
-            checkAndSetShader(viewWidth, viewHeight, (int) length);
-            canvas.translate(left, 0);
-            canvas.drawRect(-viewWidth, 0, viewWidth * 2, viewHeight, mPaint);
+                canvas.restore();
+            }
 
-            canvas.restore();
         }
+
+
     }
 
     private Shader mShader = null;
@@ -133,7 +140,6 @@ public class ShimmerHelper {
         //// TODO: 2016/10/12 0012
         System.out.printf("not imp");
         ShimmerView shimmerView = this.shimmerView.get();
-
         if (shimmerView != null) {
             shimmerView.callSupperOnDraw(canvas);
         }
@@ -148,7 +154,16 @@ public class ShimmerHelper {
 
     public void onDetachedFromWindow() {
         isAttachToWindow = false;
-        stopShimmer();
+        stopShimmerInner();
+    }
+
+    private void stopShimmerInner() {
+        mIsStarted = false;
+        if (mAnimator != null) {
+            mAnimator.cancel();
+            mAnimator = null;
+        }
+        invalidateShimmerView();
     }
 
 
@@ -160,13 +175,7 @@ public class ShimmerHelper {
 
     public void stopShimmer() {
         mForceStop = true;
-        mIsStarted = false;
-        mAutoStart = false;
-        if (mAnimator != null) {
-            mAnimator.cancel();
-            mAnimator = null;
-        }
-        invalidateShimmerView();
+        stopShimmerInner();
     }
 
 
