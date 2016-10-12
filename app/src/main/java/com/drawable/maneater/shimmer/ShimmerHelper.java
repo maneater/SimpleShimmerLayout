@@ -59,18 +59,21 @@ public class ShimmerHelper {
         mPaint.setXfermode(DST_IN_PORTER_DUFF_XFERMODE);
         maskLengthFactor = 0.5f;
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ShimmerView);
-        try {
-            mAutoStart = ta.getBoolean(R.styleable.ShimmerView_autoStart, mAutoStart);
-            mBaseAlpha = (int) (ta.getFloat(R.styleable.ShimmerView_baseAlpha, 0.8f) * 255);
-            mRepeatCount = ta.getInt(R.styleable.ShimmerView_repeatCount, mRepeatCount);
-            mRepeatMode = ta.getInt(R.styleable.ShimmerView_repeatMode, mRepeatMode);
-            mDuration = ta.getInt(R.styleable.ShimmerView_duration, mDuration);
-            mRepeatDelay = ta.getInt(R.styleable.ShimmerView_repeatDelay, mRepeatDelay);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            ta.recycle();
+        if (ta != null) {
+            try {
+                mAutoStart = ta.getBoolean(R.styleable.ShimmerView_autoStart, mAutoStart);
+                mBaseAlpha = (int) (ta.getFloat(R.styleable.ShimmerView_baseAlpha, 0.8f) * 255);
+                mRepeatCount = ta.getInt(R.styleable.ShimmerView_repeatCount, mRepeatCount);
+                mRepeatMode = ta.getInt(R.styleable.ShimmerView_repeatMode, mRepeatMode);
+                mDuration = ta.getInt(R.styleable.ShimmerView_duration, mDuration);
+                mRepeatDelay = ta.getInt(R.styleable.ShimmerView_repeatDelay, mRepeatDelay);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                ta.recycle();
+            }
         }
+
     }
 
 
