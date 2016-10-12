@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            app:s_auto_start="true">
+            app:autoStart="true">
 
             <include layout="@layout/inner_layout" />
 
@@ -25,11 +25,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            app:s_auto_start="true"
-            app:s_base_alpha="0.7"
-            app:s_duration="800"
-            app:s_repeat_count="-1"
-            app:s_repeat_mode="reverse">
+            app:autoStart="true"
+            app:baseAlpha="0.7"
+            app:duration="800"
+            app:repeatCount="-1"
+            app:repeatMode="reverse">
 
             <include layout="@layout/inner_layout" />
 

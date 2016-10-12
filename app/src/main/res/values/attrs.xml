@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="ShimmerView">
-        <attr name="s_auto_start" format="boolean" />
-        <attr name="s_base_alpha" format="float" />
-        <attr name="s_duration" format="integer" />
-        <attr name="s_repeat_count" format="integer" />
-        <attr name="s_repeat_delay" format="integer" />
-        <attr name="s_repeat_mode" format="enum">
+        <attr name="autoStart" format="boolean" />
+        <attr name="baseAlpha" format="float" />
+        <attr name="duration" format="integer" />
+        <attr name="repeatCount" format="integer" />
+        <attr name="repeatDelay" format="integer" />
+        <attr name="repeatMode" format="enum">
             <enum name="restart" value="1" />
             <enum name="reverse" value="2" />
         </attr>
-        <attr name="s_relative_width" format="float" />
-        <attr name="s_relative_height" format="float" />
+        <!--<attr name="s_relative_width" format="float" />-->
+        <!--<attr name="s_relative_height" format="float" />-->
 
-        <attr name="s_shape" format="enum">
-            <enum name="linear" value="0" />
-            <enum name="radial" value="1" />
-        </attr>
+        <!--<attr name="s_shape" format="enum">-->
+        <!--<enum name="linear" value="0" />-->
+        <!--<enum name="radial" value="1" />-->
+        <!--</attr>-->
 
     </declare-styleable>
 

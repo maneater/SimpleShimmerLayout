@@ -43,6 +43,7 @@ public class ShimmerHelper {
     private boolean mIsStarted = false;
     private int mRepeatCount = ValueAnimator.INFINITE;
     private int mRepeatMode = ValueAnimator.RESTART;
+    private int mRepeatDelay = 300;
     private int mDuration = 800;
 
     public ShimmerHelper(ShimmerView targetView) {
@@ -56,12 +57,12 @@ public class ShimmerHelper {
         maskLengthFactor = 0.5f;
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ShimmerView);
         try {
-            mAutoStart = ta.getBoolean(R.styleable.ShimmerView_s_auto_start, mAutoStart);
-            mBaseAlpha = ta.getFloat(R.styleable.ShimmerView_s_base_alpha, mBaseAlpha);
-            mRepeatCount = ta.getInt(R.styleable.ShimmerView_s_repeat_count, mRepeatCount);
-            mRepeatMode = ta.getInt(R.styleable.ShimmerView_s_repeat_mode, mRepeatMode);
-            mDuration = ta.getInt(R.styleable.ShimmerView_s_duration, mDuration);
-
+            mAutoStart = ta.getBoolean(R.styleable.ShimmerView_autoStart, mAutoStart);
+            mBaseAlpha = ta.getFloat(R.styleable.ShimmerView_baseAlpha, mBaseAlpha);
+            mRepeatCount = ta.getInt(R.styleable.ShimmerView_repeatCount, mRepeatCount);
+            mRepeatMode = ta.getInt(R.styleable.ShimmerView_repeatMode, mRepeatMode);
+            mDuration = ta.getInt(R.styleable.ShimmerView_duration, mDuration);
+            mRepeatDelay = ta.getInt(R.styleable.ShimmerView_repeatDelay, mRepeatDelay);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -178,22 +179,32 @@ public class ShimmerHelper {
             return mAnimator;
         }
 
-        mAnimator = ValueAnimator.ofFloat(-1.0f, 1.0f);
-        mAnimator.setDuration(mDuration);
+        float repeatDelayFactor = mRepeatDelay * 1.0F / mDuration;
+
+        mAnimator = ValueAnimator.ofFloat(-1.0f, 1.0f + (repeatDelayFactor * (1.0f - (-1.0f))));
+        mAnimator.setDuration(mDuration + mRepeatDelay);
         mAnimator.setRepeatCount(mRepeatCount);
         mAnimator.setRepeatMode(mRepeatMode);
 
         mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                xOffsetFactor = (float) animation.getAnimatedValue();
-                ShimmerView targetView = shimmerView.get();
-                if (targetView != null) {
-                    targetView.invalidate();
+                float animationValue = clamp(-1.0f, 1.0f, (float) animation.getAnimatedValue());
+                if (animationValue != xOffsetFactor) {
+                    xOffsetFactor = animationValue;
+
+                    ShimmerView targetView = shimmerView.get();
+                    if (targetView != null) {
+                        targetView.invalidate();
+                    }
                 }
             }
         });
         return mAnimator;
+    }
+
+    private static float clamp(float min, float max, float value) {
+        return Math.min(max, Math.max(min, value));
     }
 
 
