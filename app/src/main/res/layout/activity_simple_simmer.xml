@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.drawable.maneater.shimmerframelayout.MainActivity">
+
+        <com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/inner_layout" />
+
+        </com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout>
+
+        <com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/inner_layout" />
+
+        </com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout>
+
+        <com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/inner_layout" />
+
+        </com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout>
+
+        <com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/inner_layout" />
+
+        </com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout>
+
+        <com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/inner_layout" />
+
+        </com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout>
+
+        <com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/inner_layout" />
+
+        </com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout>
+
+        <com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/inner_layout" />
+
+        </com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout>
+
+        <com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/inner_layout" />
+
+        </com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout>
+
+        <com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/inner_layout" />
+
+        </com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout>
+
+        <com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/inner_layout" />
+
+        </com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout>
+
+        <com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/inner_layout" />
+
+        </com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout>
+
+        <com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/inner_layout" />
+
+        </com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout>
+
+        <com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/inner_layout" />
+
+        </com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout>
+
+        <com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/inner_layout" />
+
+        </com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout>
+
+        <com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/inner_layout" />
+
+        </com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout>
+
+        <com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/inner_layout" />
+
+        </com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout>
+
+        <com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/inner_layout" />
+
+        </com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout>
+
+        <com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/inner_layout" />
+
+        </com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout>
+
+        <com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/inner_layout" />
+
+        </com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout>
+
+        <com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/inner_layout" />
+
+        </com.drawable.maneater.shimmerframelayout.ShimmerFrameLayout>
+
+
+    </LinearLayout>
+</ScrollView>
+
+
