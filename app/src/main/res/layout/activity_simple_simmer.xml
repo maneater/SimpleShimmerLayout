@@ -8,6 +8,7 @@
         android:id="@+id/activity_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
         tools:context="com.drawable.maneater.MainActivity">
 
@@ -15,81 +16,57 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            app:baseAlpha="0.1"
-            app:autoStart="true">
+            android:orientation="vertical"
+            app:autoStart="true"
+            app:baseAlpha="0.1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="LinearLayout" />
 
             <include layout="@layout/inner_layout" />
 
         </com.drawable.maneater.shimmer.LinearLayout>
 
-        <com.drawable.maneater.shimmer.LinearLayout
+        <com.drawable.maneater.shimmer.FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             app:autoStart="true"
-            app:baseAlpha="0.7"
+            app:baseAlpha="0.5"
             app:duration="800"
             app:repeatCount="-1"
             app:repeatMode="reverse">
 
-            <include layout="@layout/inner_layout" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="FrameLayout" />
 
-        </com.drawable.maneater.shimmer.LinearLayout>
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp">
 
-        <com.drawable.maneater.shimmer.LinearLayout
+                <include layout="@layout/inner_layout" />
+            </FrameLayout>
+
+        </com.drawable.maneater.shimmer.FrameLayout>
+
+        <com.drawable.maneater.shimmer.ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <include layout="@layout/inner_layout" />
-
-        </com.drawable.maneater.shimmer.LinearLayout>
-
-        <com.drawable.maneater.shimmer.LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <include layout="@layout/inner_layout" />
-
-        </com.drawable.maneater.shimmer.LinearLayout>
-
-        <com.drawable.maneater.shimmer.LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <include layout="@layout/inner_layout" />
-
-        </com.drawable.maneater.shimmer.LinearLayout>
-
-        <com.drawable.maneater.shimmer.LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <include layout="@layout/inner_layout" />
-
-        </com.drawable.maneater.shimmer.LinearLayout>
-
-        <com.drawable.maneater.shimmer.LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <include layout="@layout/inner_layout" />
-
-        </com.drawable.maneater.shimmer.LinearLayout>
-
-        <com.drawable.maneater.shimmer.LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <include layout="@layout/inner_layout" />
-
-        </com.drawable.maneater.shimmer.LinearLayout>
-
+            android:layout_marginTop="20dp"
+            android:src="@mipmap/ic_launcher"
+            app:autoStart="true"
+            app:baseAlpha="0.3"
+            android:scaleType="fitXY"
+            app:duration="1000"
+            app:repeatCount="-1"
+            app:repeatMode="restart" />
 
     </LinearLayout>
 </ScrollView>

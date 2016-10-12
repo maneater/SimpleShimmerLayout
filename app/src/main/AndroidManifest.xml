@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".FaceBookShimmer" />
-        <activity android:name=".SimpleSimmer"></activity>
+        <activity android:name=".SimpleShimmer"></activity>
     </application>
 
 </manifest>

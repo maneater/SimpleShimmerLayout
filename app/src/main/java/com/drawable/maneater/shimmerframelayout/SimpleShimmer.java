@@ -3,7 +3,7 @@ package com.drawable.maneater.shimmerframelayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class SimpleSimmer extends AppCompatActivity {
+public class SimpleShimmer extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

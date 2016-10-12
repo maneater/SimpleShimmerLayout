@@ -15,6 +15,7 @@ import android.graphics.Shader;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.drawable.maneater.shimmerframelayout.R;
@@ -57,7 +58,6 @@ public class ShimmerHelper {
     public void init(Context context, AttributeSet attrs) {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setXfermode(DST_IN_PORTER_DUFF_XFERMODE);
-        maskLengthFactor = 0.5f;
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ShimmerView);
         if (ta != null) {
             try {
@@ -73,7 +73,6 @@ public class ShimmerHelper {
                 ta.recycle();
             }
         }
-
     }
 
 
@@ -140,11 +139,34 @@ public class ShimmerHelper {
     }
 
     public void onDraw(Canvas canvas) {
-        //// TODO: 2016/10/12 0012
-        System.out.printf("not imp");
-        ShimmerView shimmerView = this.shimmerView.get();
-        if (shimmerView != null) {
-            shimmerView.callSupperOnDraw(canvas);
+        ShimmerView targetView = this.shimmerView.get();
+        if (targetView != null) {
+            if (!mIsStarted) {
+                targetView.callSupperOnDraw(canvas);
+                return;
+            }
+
+            if (!(targetView instanceof ViewGroup) && targetView instanceof View) {
+                int viewWidth = targetView.getWidth();
+                int viewHeight = targetView.getHeight();
+                //        draw alpha base
+                canvas.saveLayerAlpha(0, 0, viewWidth, viewHeight, mBaseAlpha, LAYER_FLAGS);
+                targetView.callSupperOnDraw(canvas);
+                canvas.restore();
+
+
+                float left = xOffsetFactor * viewWidth;
+                float length = viewWidth * maskLengthFactor;
+
+                canvas.saveLayer(0, 0, viewWidth, viewHeight, null, LAYER_FLAGS);
+                targetView.callSupperOnDraw(canvas);
+                checkAndSetShader(viewWidth, viewHeight, (int) length);
+                canvas.translate(left, 0);
+                canvas.drawRect(-viewWidth, 0, viewWidth * 2, viewHeight, mPaint);
+
+                canvas.restore();
+            }
+
         }
     }
 
