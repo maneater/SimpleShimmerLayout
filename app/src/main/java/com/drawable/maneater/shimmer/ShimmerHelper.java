@@ -1,4 +1,4 @@
-package com.drawable.maneater.shimmerframelayout;
+package com.drawable.maneater.shimmer;
 
 
 import android.animation.Animator;
@@ -7,16 +7,21 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.DrawFilter;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Shader;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.ViewGroup;
 
+import com.drawable.maneater.shimmerframelayout.R;
+
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ShimmerHelper {
     private WeakReference<ShimmerView> shimmerView = null;
@@ -37,7 +42,7 @@ public class ShimmerHelper {
     private boolean mAutoStart = true;
     private boolean mIsStarted = false;
     private int mRepeatCount = ValueAnimator.INFINITE;
-    private int mRepeatMode = ValueAnimator.REVERSE;
+    private int mRepeatMode = ValueAnimator.RESTART;
     private int mDuration = 800;
 
     public ShimmerHelper(ShimmerView targetView) {
@@ -47,6 +52,7 @@ public class ShimmerHelper {
 
     public void init(Context context, AttributeSet attrs) {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaint.setXfermode(DST_IN_PORTER_DUFF_XFERMODE);
         maskLengthFactor = 0.5f;
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ShimmerView);
         try {
@@ -83,15 +89,40 @@ public class ShimmerHelper {
 
             canvas.saveLayer(0, 0, viewWidth, viewHeight, null, LAYER_FLAGS);
             targetView.callSuperOnDispatchDraw(canvas);
-
-            Shader shader = new LinearGradient(left, 0, left + length, viewHeight, new int[]{Color.TRANSPARENT, Color.BLACK, Color.TRANSPARENT}, new float[]{0, 0.5f, 1.0f},
-                    Shader.TileMode.CLAMP);
-            mPaint.setShader(shader);
-            mPaint.setXfermode(DST_IN_PORTER_DUFF_XFERMODE);
-            canvas.drawRect(0, 0, viewWidth, viewHeight, mPaint);
+            checkAndSetShader(viewWidth, viewHeight, (int) length);
+            canvas.translate(left, 0);
+            canvas.drawRect(-viewWidth, 0, viewWidth * 2, viewHeight, mPaint);
 
             canvas.restore();
         }
+    }
+
+    private Shader mShader = null;
+
+    private void checkAndSetShader(int viewWidth, int viewHeight, int length) {
+        Shader shader = getShader(viewWidth, viewHeight, length);
+        if (mShader != shader) {
+            mPaint.setShader(shader);
+        }
+        mShader = shader;
+    }
+
+    private static Map<String, Shader> mShaderCache = new HashMap<String, Shader>();
+
+    @NonNull
+    private static Shader getShader(int viewWidth, int viewHeight, int length) {
+        String shaderKey = "|" + viewWidth + "|" + viewHeight + "|" + length;
+        Shader shader = mShaderCache.get(shaderKey);
+        if (shader != null) {
+            return shader;
+        }
+
+        Log.d("Shimmer", "create shader for :" + shaderKey);
+
+        shader = new LinearGradient((viewWidth - length) / 2, 0, (viewWidth + length) / 2, viewHeight, new int[]{Color.TRANSPARENT, Color.BLACK, Color.TRANSPARENT}, new float[]{0, 0.5f, 1.0f},
+                Shader.TileMode.CLAMP);
+        mShaderCache.put(shaderKey, shader);
+        return shader;
     }
 
     public void onDraw(Canvas canvas) {
@@ -147,7 +178,7 @@ public class ShimmerHelper {
             return mAnimator;
         }
 
-        mAnimator = ValueAnimator.ofFloat(-1f, 1.0f);
+        mAnimator = ValueAnimator.ofFloat(-1.0f, 1.0f);
         mAnimator.setDuration(mDuration);
         mAnimator.setRepeatCount(mRepeatCount);
         mAnimator.setRepeatMode(mRepeatMode);

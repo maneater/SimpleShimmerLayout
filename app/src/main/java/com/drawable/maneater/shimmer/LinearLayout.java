@@ -5,11 +5,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 
-import com.drawable.maneater.shimmerframelayout.ShimmerHelper;
-
-/**
- * Created by Administrator on 2016/10/12 0012.
- */
 
 public class LinearLayout extends android.widget.LinearLayout implements ShimmerHelper.ShimmerView {
     private ShimmerHelper shimmerHelper = null;
@@ -25,7 +20,7 @@ public class LinearLayout extends android.widget.LinearLayout implements Shimmer
     public LinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         shimmerHelper = new ShimmerHelper(this);
-        shimmerHelper.init(context,attrs);
+        shimmerHelper.init(context, attrs);
     }
 
 
