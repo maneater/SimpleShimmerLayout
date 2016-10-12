@@ -39,7 +39,7 @@ public class ShimmerHelper {
     private ValueAnimator mAnimator;
 
     private float mBaseAlpha = 0.8f;
-    private boolean mAutoStart = true;
+    private boolean mAutoStart = false;
     private boolean mIsStarted = false;
     private int mRepeatCount = ValueAnimator.INFINITE;
     private int mRepeatMode = ValueAnimator.RESTART;
